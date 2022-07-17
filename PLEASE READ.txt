@@ -1,0 +1,28 @@
+I believe I have completed this code challenge to the best of my ability. I wrote 5 Unit tests to confirm the routes I added are working as intended.
+
+I did, however, run into one significant issue: Attempting to add models that contained an object reference (i.e. the Direct Reports List within an
+Employee and an Employee object within a Compensation object) to a DB Set would result in the nested object being replaced with a null reference. I do
+not know why the DB Set acted this way, nor do I know how to fix it without replacing object references with primitive types. I have included screenshots
+in this directory of both the Employee Context and the Compensation Context at the time of my attempting to retrieve objects that contained the null object
+references.
+
+A few notes on my designs, with this issue in mind:
+
+The route to get a direct report should work as intended, but will always be created with 0 for the number of direct reports. My route is attempting to
+calculate how many direct reports each Employee will have, but since retrieving any employee will always have a null reference for its List of Direct
+Reports, the method will always return 0. If this is changed such that the DB stores an array of strings (employee IDs) or there is a way to actually
+store the List in the database, then I could make additional calls to the GetEmployeeById route for each employee to track their direct reports, or
+just total reports respectively.
+
+I saw in the included README document that the JSON schema for employees was specified as an array of strings, but that was not reflected in the code
+I was given. Additionally, there was a helper method in the Database seeding class that deliberately created to fill the List of DirectReports with
+employee objects for each employee object used to seed the database, which gave me the impression that the employee model storing a list of employee
+objects as opposed to an array of employee ID strings was intentional, and the DB Set not storing the List was unintentional.
+
+My initial design for the Compensation object had it store an employee object, but since that would always be replaced with a null reference, I had the
+compensation object’s employee field simply be a string containing an EmployeeId. While I believe it would be better design to actually store the
+Employee Object, having employee simply be the ID enabled me to make the GetCompensationById route actually take an EmployeeId to search with, as a null
+employee reference would’ve prevented me from filtering for compensation.employee.EmployeeId and I would’ve needed to use the CompensationId I added to the
+object. Your initial design said nothing about a compensation Id, but I went ahead and included it since I think every item stored in a database
+should have its own unique GUID, especially since the SingleOrDefault() method will throw an error if there are two objects with the same identifying
+characteristic.
