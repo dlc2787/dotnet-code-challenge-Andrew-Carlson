@@ -7,7 +7,7 @@ of the mentioned Contexts at the time I tried to retrieve an object from them, h
 
 A few notes on my designs, with this issue in mind:
 
-The route to get a direct report should work as intended, but will always be created with 0 for the number of direct reports. My route is attempting to
+The route to get a ReportingStructure should work as intended, but will always be created with 0 for the number of direct reports. My route is attempting to
 calculate how many direct reports each Employee will have, but since retrieving any employee will always have a null reference for its List of Direct
 Reports, the method will always return 0. If this is changed such that the DB stores an array of strings (employee IDs) or there is a way to actually
 store the List in the database, then I could make additional calls to the GetEmployeeById route for each employee to track their direct reports, or
