@@ -1,10 +1,9 @@
-I believe I have completed this code challenge to the best of my ability. I wrote 5 Unit tests to confirm the routes I added are working as intended.
+I believe I have completed this code challenge to the best of my ability. I wrote 5 unit tests to confirm the routes I added are working as intended.
 
 I did, however, run into one significant issue: Attempting to add models that contained an object reference (i.e. the Direct Reports List within an
 Employee and an Employee object within a Compensation object) to a DB Set would result in the nested object being replaced with a null reference. I do
 not know why the DB Set acted this way, nor do I know how to fix it without replacing object references with primitive types. I have included screenshots
-in this directory of both the Employee Context and the Compensation Context at the time of my attempting to retrieve objects that contained the null object
-references.
+of the mentioned Contexts at the time I tried to retrieve an object from them, highlighting the issue.
 
 A few notes on my designs, with this issue in mind:
 
